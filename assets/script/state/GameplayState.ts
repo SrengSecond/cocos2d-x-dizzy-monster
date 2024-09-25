@@ -1,49 +1,31 @@
-import {Input} from 'cc';
 import {State} from './State';
-import {StateController} from './StateController';
+import {GameplayController} from '../controller/GameplayController';
 
 export class GameplayState implements State {
-  enter(stateController: StateController): void {
-    // stateController.getNoButton &&
-    //   stateController.getNoButton.node.on(Input.EventType.TOUCH_START, () =>
-    //     this.handleTouchNo(stateController)
-    //   );
+  enter(gameplayController: GameplayController): void {
+    // Initialize gameplay state
+    gameplayController.changeUI('GAMEPLAY');
 
-    stateController.getYesButton &&
-      stateController.getYesButton.node.on(
-        Input.EventType.TOUCH_START,
-        () =>
-          // this.handleTouchYes(stateController)
-          {
-            stateController.changeState(stateController.gameOverState);
-          },
-        stateController
-      );
+    // Listen for touch start event
+    gameplayController.initGameplayEvent();
 
-    // Show the intro UI
-    stateController.changeUI('GAMEPLAY');
+    // Get the first random card
+    gameplayController.getRandomGameplayCard();
   }
 
-  update(stateController: StateController): void {
+  update(gameplayController: GameplayController): void {
     // Update logic for game over state
   }
 
-  exit(stateController: StateController): void {
-    // stateController.getYesButton &&
-    //   stateController.getYesButton.node.off(Input.EventType.TOUCH_START, () => {
-    //     stateController.changeState(stateController.gameOverState);
-    //   });
-    // stateController.getNoButton &&
-    //   stateController.getNoButton.node.off(Input.EventType.TOUCH_START);
-    // Cleanup game over state
+  exit(gameplayController: GameplayController): void {
+    // stateController.gameplayController?.clearEvent();
+    gameplayController.clearGameplayEvent();
   }
 
-  private handleTouchYes(stateController: StateController) {
+  private handleTouchYes(gameplayController: GameplayController) {
     console.log('Yes button clicked');
-    stateController.changeState(stateController.gameOverState);
+    // gameplayController.changeState(gameplayController.gameOverState);
 
     // stateController.changeState(stateController.introState);
   }
-
-  private handleTouchNo(stateController: StateController) {}
 }

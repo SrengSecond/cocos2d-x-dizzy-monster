@@ -1,31 +1,23 @@
-import {Input} from 'cc';
 import {State} from './State';
-import {StateController} from './StateController';
+import {GameplayController} from '../controller/GameplayController';
 
 export class IntroState implements State {
-  enter(stateController: StateController): void {
-    // Listen for touch start event
-    stateController.getContainerUI &&
-      stateController.getContainerUI.on(
-        Input.EventType.TOUCH_START,
-        () => this.handleStart(stateController),
-        stateController
-      );
-
+  enter(gameplayController: GameplayController): void {
     // Initialize game over state
-    stateController.changeUI('INTRO');
+    gameplayController.changeUI('INTRO');
 
-    // Show the intro UI
+    // Listen for touch start event
+    gameplayController.initIntroEvent();
+
+    // Get the first random card
+    gameplayController.getRandomIntroCard();
   }
 
-  update(stateController: StateController): void {}
-
-  exit(stateController: StateController): void {
-    stateController.getContainerUI &&
-      stateController.getContainerUI.off(Input.EventType.TOUCH_START);
+  update(gameplayController: GameplayController): void {
+    // Update logic for intro state
   }
 
-  private handleStart(stateController: StateController) {
-    stateController.changeState(stateController.gameplayState);
+  exit(gameplayController: GameplayController): void {
+    gameplayController.clearIntroEvent();
   }
 }

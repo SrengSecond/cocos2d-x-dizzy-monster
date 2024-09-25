@@ -1,7 +1,7 @@
-import {StateController} from './StateController';
+import {GameplayController} from '../controller/GameplayController';
 
 export interface State {
-  enter(stateController: StateController): void;
-  update(stateController: StateController): void;
-  exit(stateController: StateController): void;
+  enter(stateController: GameplayController): void;
+  update(stateController: GameplayController): void;
+  exit(stateController: GameplayController): void;
 }

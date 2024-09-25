@@ -1,17 +1,16 @@
+import {GameplayController} from '../controller/GameplayController';
 import {State} from './State';
-import {StateController} from './StateController';
 
 export class GameOverState implements State {
-  enter(stateController: StateController): void {
-    console.log('Game Over State');
-    stateController.changeUI('GAMEOVER');
+  enter(gameOverState: GameplayController): void {
+    gameOverState.changeUI('GAMEOVER');
   }
 
-  update(stateController: StateController): void {
+  update(gameOverState: GameplayController): void {
     // Update logic for game over state
   }
 
-  exit(stateController: StateController): void {
+  exit(gameOverState: GameplayController): void {
     // Cleanup game over state
   }
 }
