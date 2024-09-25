@@ -1,0 +1,247 @@
+{
+  "ver": "1.0.8",
+  "importer": "sprite-atlas",
+  "imported": true,
+  "uuid": "6bdca73e-f840-45e6-8280-30633385fda2",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {
+    "3e783": {
+      "importer": "sprite-frame",
+      "uuid": "6bdca73e-f840-45e6-8280-30633385fda2@3e783",
+      "displayName": "",
+      "id": "3e783",
+      "name": "Wild-Ooze",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 1,
+        "trimY": 1,
+        "width": 579,
+        "height": 800,
+        "rawWidth": 579,
+        "rawHeight": 800,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [],
+          "indexes": [],
+          "uv": [],
+          "nuv": [],
+          "minPos": [],
+          "maxPos": []
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "52df9bff-8dd1-4a76-9f10-766b51904984@6c48a",
+        "atlasUuid": "6bdca73e-f840-45e6-8280-30633385fda2"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "2c790": {
+      "importer": "sprite-frame",
+      "uuid": "6bdca73e-f840-45e6-8280-30633385fda2@2c790",
+      "displayName": "",
+      "id": "2c790",
+      "name": "Wild-Spider",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 1,
+        "trimY": 803,
+        "width": 579,
+        "height": 800,
+        "rawWidth": 579,
+        "rawHeight": 800,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [],
+          "indexes": [],
+          "uv": [],
+          "nuv": [],
+          "minPos": [],
+          "maxPos": []
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "52df9bff-8dd1-4a76-9f10-766b51904984@6c48a",
+        "atlasUuid": "6bdca73e-f840-45e6-8280-30633385fda2"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "7964b": {
+      "importer": "sprite-frame",
+      "uuid": "6bdca73e-f840-45e6-8280-30633385fda2@7964b",
+      "displayName": "",
+      "id": "7964b",
+      "name": "Wild-Squirrelbrown",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": true,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 582,
+        "trimY": 1,
+        "width": 579,
+        "height": 800,
+        "rawWidth": 579,
+        "rawHeight": 800,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [],
+          "indexes": [],
+          "uv": [],
+          "nuv": [],
+          "minPos": [],
+          "maxPos": []
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "52df9bff-8dd1-4a76-9f10-766b51904984@6c48a",
+        "atlasUuid": "6bdca73e-f840-45e6-8280-30633385fda2"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ec58e": {
+      "importer": "sprite-frame",
+      "uuid": "6bdca73e-f840-45e6-8280-30633385fda2@ec58e",
+      "displayName": "",
+      "id": "ec58e",
+      "name": "Wild-WolfBerserk",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 1384,
+        "trimY": 1,
+        "width": 579,
+        "height": 800,
+        "rawWidth": 579,
+        "rawHeight": 800,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [],
+          "indexes": [],
+          "uv": [],
+          "nuv": [],
+          "minPos": [],
+          "maxPos": []
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "52df9bff-8dd1-4a76-9f10-766b51904984@6c48a",
+        "atlasUuid": "6bdca73e-f840-45e6-8280-30633385fda2"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3cdaa": {
+      "importer": "sprite-frame",
+      "uuid": "6bdca73e-f840-45e6-8280-30633385fda2@3cdaa",
+      "displayName": "",
+      "id": "3cdaa",
+      "name": "Wild-Wurm",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": true,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 582,
+        "trimY": 582,
+        "width": 579,
+        "height": 800,
+        "rawWidth": 579,
+        "rawHeight": 800,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [],
+          "indexes": [],
+          "uv": [],
+          "nuv": [],
+          "minPos": [],
+          "maxPos": []
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "52df9bff-8dd1-4a76-9f10-766b51904984@6c48a",
+        "atlasUuid": "6bdca73e-f840-45e6-8280-30633385fda2"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "atlasTextureName": "card-3.png",
+    "format": 3,
+    "uuid": "6bdca73e-f840-45e6-8280-30633385fda2",
+    "textureUuid": "52df9bff-8dd1-4a76-9f10-766b51904984@6c48a"
+  }
+}
