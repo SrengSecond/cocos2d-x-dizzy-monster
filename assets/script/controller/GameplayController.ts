@@ -21,7 +21,7 @@ export class GameplayController extends Component {
   private _currentState: State | null = null;
 
   private _score = 0;
-  private _countdown = 3;
+  private _countdown = 999;
   private _countdownInterval: number | null = null;
 
   public introState = new IntroState();
@@ -239,15 +239,18 @@ export class GameplayController extends Component {
   }
 
   private handleClickYes() {
-    console.log('Yes button clicked');
     if (this.cardController && this._prevCardSpriteFrame) {
       // check if the card is matched
+
       if (this.cardController.isMatched(this._prevCardSpriteFrame)) {
         // add score
         this.incrementScore();
 
         // reset countdown
         this.restartCountdown();
+
+        // remove the current card
+        this.cardController.removePrevCardInstance();
 
         // pick another card
         this._prevCardSpriteFrame = this._currentCardSpriteFrame;
@@ -257,6 +260,9 @@ export class GameplayController extends Component {
         // Stop countdown
         this.stopCountdown();
 
+        // remove the last card
+        this.cardController.removeLastCardInstance();
+
         // change game state to game over
         this.changeState(this.gameOverState);
       }
@@ -264,7 +270,6 @@ export class GameplayController extends Component {
   }
 
   private handleClickNo() {
-    console.log('No button clicked');
     if (this.cardController && this._prevCardSpriteFrame) {
       // check if the card is matched
       if (!this.cardController.isMatched(this._prevCardSpriteFrame)) {
@@ -274,6 +279,9 @@ export class GameplayController extends Component {
         // reset countdown
         this.restartCountdown();
 
+        // remove the current card
+        this.cardController.removePrevCardInstance();
+
         // pick another card
         this._prevCardSpriteFrame = this._currentCardSpriteFrame;
         this._currentCardSpriteFrame =
@@ -281,6 +289,9 @@ export class GameplayController extends Component {
       } else {
         // Stop countdown
         this.stopCountdown();
+
+        // remove the last card
+        this.cardController.removeLastCardInstance();
 
         // change game state to game over
         this.changeState(this.gameOverState);
@@ -314,22 +325,6 @@ export class GameplayController extends Component {
     }
   }
 
-  // public startCountdown() {
-  //   let countdown = this._countdown;
-  //   this.updateCountdown(this._countdown);
-  //
-  //   this._countdownInterval = setInterval(() => {
-  //     countdown--;
-  //     this.updateCountdown(countdown);
-  //     console.log('Countdown:', countdown);
-  //
-  //     if (countdown <= 0 && this._countdownInterval) {
-  //       clearInterval(this._countdownInterval);
-  //       this.changeState(this.gameOverState);
-  //     }
-  //   }, 1000);
-  // }
-
   public startCountdown() {
     let countdown = this._countdown;
     let countdownMs = this._countdown * 1000; // Convert to milliseconds
@@ -337,7 +332,7 @@ export class GameplayController extends Component {
     // this.updateCircleCountdown(countdownMs / 1000);
 
     this._countdownInterval = setInterval(() => {
-      countdownMs -= 100; // Decrease by 100 milliseconds
+      countdownMs -= 10; // Decrease by 100 milliseconds
       const newCountdown = Math.floor(countdownMs / 1000); // Convert to seconds
 
       this.updateCircleCountdown(countdownMs / 1000);
@@ -347,13 +342,13 @@ export class GameplayController extends Component {
         this.updateCountdown(countdown + 1);
       }
 
-      console.log('Countdown:', countdown, 'CountdownMs:', countdownMs);
+      // console.log('Countdown:', countdown, 'CountdownMs:', countdownMs);
 
       if (countdownMs <= 0 && this._countdownInterval) {
         clearInterval(this._countdownInterval);
         this.changeState(this.gameOverState);
       }
-    }, 100);
+    }, 10);
   }
 
   private stopCountdown() {

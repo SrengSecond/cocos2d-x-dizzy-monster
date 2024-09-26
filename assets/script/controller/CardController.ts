@@ -1,14 +1,29 @@
-import {_decorator, Component, Node, Sprite, SpriteFrame} from 'cc';
+import {
+  _decorator,
+  Component,
+  instantiate,
+  Node,
+  Prefab,
+  Sprite,
+  SpriteFrame,
+  Animation,
+} from 'cc';
 
 const {ccclass, property} = _decorator;
 
 @ccclass('CardControllerCard')
 export class CardController extends Component {
+  @property(Prefab)
+  private cardPrefab: Prefab | null = null;
+
+  @property(Node)
+  public cardCotainer: Node | null = null;
+
   @property(Sprite)
   private introCardSprite: Sprite | null = null;
 
-  @property(Sprite)
-  private gameplayCardSprite: Sprite | null = null;
+  // @property(Sprite)
+  // private gameplayCardSprite: Sprite | null = null;
 
   @property([SpriteFrame])
   private airCardSprite: SpriteFrame[] = [];
@@ -27,6 +42,7 @@ export class CardController extends Component {
 
   private _currentSpriteFrame: SpriteFrame | null = null;
   private _spriteFramePool: SpriteFrame[] = [];
+  private _previousCardInstace: Node | null = null;
 
   public updateDifficulty(level: 'EASY' | 'MEDIUM' | 'HARD') {
     const {maxLength} = this.levelConfig(level);
@@ -66,13 +82,52 @@ export class CardController extends Component {
       this._currentSpriteFrame = this._spriteFramePool[randomIndex];
 
       // Update the card sprite
-      this.gameplayCardSprite &&
-        (this.gameplayCardSprite.spriteFrame = this._currentSpriteFrame);
+      // this.gameplayCardSprite &&
+      //   (this.gameplayCardSprite.spriteFrame = this._currentSpriteFrame);
+
+      // Create a new card instance
+      if (this.cardCotainer && this.cardPrefab) {
+        const instance = instantiate(this.cardPrefab);
+        const instanceSprite = instance.getComponentInChildren(Sprite);
+        instanceSprite &&
+          (instanceSprite.spriteFrame = this._currentSpriteFrame);
+
+        this.cardCotainer.addChild(instance);
+        this._previousCardInstace = instance;
+      }
 
       // Return the current sprite frame to be used for comparison
       return this._currentSpriteFrame;
     } else {
       return null;
+    }
+  }
+
+  public removePrevCardInstance() {
+    const instace = this._previousCardInstace;
+    this._previousCardInstace = null;
+
+    if (instace && this.cardCotainer) {
+      const instanceAnimation = instace?.getComponent(Animation);
+
+      if (instanceAnimation) {
+        console.log('Animation found', instanceAnimation);
+        instanceAnimation.on(Animation.EventType.FINISHED, e => {
+          console.log('Animation finished', e);
+          instace?.destroy();
+        });
+
+        instanceAnimation.play('card-leave');
+      }
+    }
+  }
+
+  public removeLastCardInstance() {
+    const instace = this._previousCardInstace;
+    this._previousCardInstace = null;
+
+    if (instace && this.cardCotainer) {
+      instace?.destroy();
     }
   }
 

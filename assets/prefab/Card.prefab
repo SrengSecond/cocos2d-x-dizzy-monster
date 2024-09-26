@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "MonsterCard",
+    "_name": "Card",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "MonsterCard",
+    "_name": "Card",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -32,10 +32,13 @@
       },
       {
         "__id__": 14
+      },
+      {
+        "__id__": 16
       }
     ],
     "_prefab": {
-      "__id__": 16
+      "__id__": 18
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -320,12 +323,16 @@
     "playOnLoad": true,
     "_clips": [
       {
-        "__uuid__": "f7c5d1ed-dc86-41c7-a22a-18766051f476",
+        "__uuid__": "b1e8e1d6-4596-4341-a594-1918891aebde",
+        "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "23279b10-e0e2-4e7d-ac73-53ac2b515c25",
         "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "f7c5d1ed-dc86-41c7-a22a-18766051f476",
+      "__uuid__": "b1e8e1d6-4596-4341-a594-1918891aebde",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": ""
@@ -333,6 +340,25 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "ccT1PTlqxCLojmdlSWhCMu"
+  },
+  {
+    "__type__": "cc.UIOpacity",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 17
+    },
+    "_opacity": 255,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "1e49kVqOpD+qb16HHLJcZn"
   },
   {
     "__type__": "cc.PrefabInfo",
