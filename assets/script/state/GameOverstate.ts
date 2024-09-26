@@ -3,7 +3,14 @@ import {State} from './State';
 
 export class GameOverState implements State {
   enter(gameOverState: GameplayController): void {
-    gameOverState.changeUI('GAMEOVER');
+    // Initialize game over state
+    gameOverState.changeUI('GAME_OVER');
+
+    // Listen for touch start event
+    gameOverState.initGameOverEvent();
+
+    // Update game over result
+    gameOverState.updateGameOverResult();
   }
 
   update(gameOverState: GameplayController): void {
@@ -11,6 +18,6 @@ export class GameOverState implements State {
   }
 
   exit(gameOverState: GameplayController): void {
-    // Cleanup game over state
+    gameOverState.clearGameOverEvent();
   }
 }

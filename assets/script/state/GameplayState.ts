@@ -11,6 +11,9 @@ export class GameplayState implements State {
 
     // Get the first random card
     gameplayController.getRandomGameplayCard();
+
+    // start countdown
+    gameplayController.startCountdown();
   }
 
   update(gameplayController: GameplayController): void {
