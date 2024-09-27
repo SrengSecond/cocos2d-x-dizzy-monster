@@ -130,8 +130,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 429.83984375,
-      "height": 60.480000000000004
+      "width": 429.79030642110945,
+      "height": 60.48
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -161,15 +161,15 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 0,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_string": "Remember this card",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 40,
+    "_actualFontSize": 43.375,
     "_fontSize": 40,
     "_fontFamily": "Arial",
     "_lineHeight": 48,
@@ -298,8 +298,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 336.35174560546875,
-      "height": 45.36
+      "width": 336.351765129683,
+      "height": 45.35999999999999
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -329,15 +329,15 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 0,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_string": "Tap anywhere to start",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 32,
+    "_actualFontSize": 34.7,
     "_fontSize": 32,
     "_fontFamily": "Arial",
     "_lineHeight": 36,

@@ -24,11 +24,4 @@ export class GameplayState implements State {
     // stateController.gameplayController?.clearEvent();
     gameplayController.clearGameplayEvent();
   }
-
-  private handleTouchYes(gameplayController: GameplayController) {
-    console.log('Yes button clicked');
-    // gameplayController.changeState(gameplayController.gameOverState);
-
-    // stateController.changeState(stateController.introState);
-  }
 }

@@ -7,6 +7,7 @@ import {
   Node,
   SpriteFrame,
   ProgressBar,
+  director,
 } from 'cc';
 import {CardController} from './CardController';
 import {IntroState} from '../state/IntroState';
@@ -39,6 +40,8 @@ export class GameplayController extends Component {
   private yesButton: Button | null = null;
   @property(Button)
   private tryAgainButton: Button | null = null;
+  @property(Button)
+  private homeButton: Button | null = null;
 
   // 📦 UI Nodes
   @property(Node)
@@ -55,6 +58,8 @@ export class GameplayController extends Component {
   private countdownValueLabel: Label | null = null;
   @property(ProgressBar)
   private countdownProgressBar: ProgressBar | null = null;
+  @property(Label)
+  private rankValueLable: Label | null = null;
 
   @property(Label)
   private gameOverScoreValueLabel: Label | null = null;
@@ -80,7 +85,7 @@ export class GameplayController extends Component {
   public initIntroEvent() {
     this.introUI &&
       this.introUI.on(
-        Input.EventType.TOUCH_START,
+        Input.EventType.TOUCH_END,
         this.handleClickAnywhere,
         this
       );
@@ -89,14 +94,14 @@ export class GameplayController extends Component {
   public initGameplayEvent() {
     this.yesButton &&
       this.yesButton.node.on(
-        Input.EventType.TOUCH_START,
+        Input.EventType.TOUCH_END,
         this.handleClickYes,
         this
       );
 
     this.noButton &&
       this.noButton.node.on(
-        Input.EventType.TOUCH_START,
+        Input.EventType.TOUCH_END,
         this.handleClickNo,
         this
       );
@@ -105,24 +110,33 @@ export class GameplayController extends Component {
   public initGameOverEvent() {
     this.tryAgainButton &&
       this.tryAgainButton.node.on(
-        Input.EventType.TOUCH_START,
+        Input.EventType.TOUCH_END,
         this.handleClickTryAgain,
+        this
+      );
+
+    this.homeButton &&
+      this.homeButton.node.on(
+        Input.EventType.TOUCH_END,
+        this.handleClickHome,
         this
       );
   }
 
   public clearIntroEvent() {
-    this.introUI && this.introUI.off(Input.EventType.TOUCH_START);
+    this.introUI && this.introUI.off(Input.EventType.TOUCH_END);
   }
 
   public clearGameplayEvent() {
-    this.yesButton && this.yesButton.node.off(Input.EventType.TOUCH_START);
-    this.noButton && this.noButton.node.off(Input.EventType.TOUCH_START);
+    this.yesButton && this.yesButton.node.off(Input.EventType.TOUCH_END);
+    this.noButton && this.noButton.node.off(Input.EventType.TOUCH_END);
   }
 
   public clearGameOverEvent() {
     this.tryAgainButton &&
-      this.tryAgainButton.node.off(Input.EventType.TOUCH_START);
+      this.tryAgainButton.node.off(Input.EventType.TOUCH_END);
+
+    this.homeButton && this.homeButton.node.off(Input.EventType.TOUCH_END);
   }
 
   public getRandomIntroCard() {
@@ -151,6 +165,7 @@ export class GameplayController extends Component {
 
   private updateScore(score: number) {
     this.scoreValueLabel && (this.scoreValueLabel.string = score.toString());
+
     if (score > 20) {
       this.updateDifficulty('MEDIUM');
     } else if (score > 40) {
@@ -162,6 +177,7 @@ export class GameplayController extends Component {
     this.countdownValueLabel &&
       (this.countdownValueLabel.string = countdown.toString());
   }
+
   private updateCircleCountdown(countdown: number) {
     this.countdownProgressBar &&
       (this.countdownProgressBar.progress = countdown / this._countdown);
@@ -178,8 +194,23 @@ export class GameplayController extends Component {
         this._score
       ).toString());
 
+    // Pick the rank based on the score
+    this.rankValueLable &&
+      (this.rankValueLable.string = this.pickRank(this._score));
+
     // Reset the gameplay score
     this.resetScore();
+  }
+
+  public handleGameOver() {
+    // Stop countdown
+    this.stopCountdown();
+
+    // remove the last card
+    this.cardController && this.cardController.removeLastCardInstance();
+
+    // change game state to game over
+    this.changeState(this.gameOverState);
   }
 
   private findBestScore(currentScore: number): number {
@@ -231,8 +262,8 @@ export class GameplayController extends Component {
         break;
 
       case 'GAME_OVER':
-        this.gameplayUI && (this.gameplayUI.active = false);
         this.introUI && (this.introUI.active = false);
+        this.gameplayUI && (this.gameplayUI.active = false);
         this.gameOverUI && (this.gameOverUI.active = true);
         break;
     }
@@ -257,14 +288,7 @@ export class GameplayController extends Component {
         this._currentCardSpriteFrame =
           this.cardController.getRandomGameplayCard();
       } else {
-        // Stop countdown
-        this.stopCountdown();
-
-        // remove the last card
-        this.cardController.removeLastCardInstance();
-
-        // change game state to game over
-        this.changeState(this.gameOverState);
+        this.handleGameOver();
       }
     }
   }
@@ -287,14 +311,7 @@ export class GameplayController extends Component {
         this._currentCardSpriteFrame =
           this.cardController.getRandomGameplayCard();
       } else {
-        // Stop countdown
-        this.stopCountdown();
-
-        // remove the last card
-        this.cardController.removeLastCardInstance();
-
-        // change game state to game over
-        this.changeState(this.gameOverState);
+        this.handleGameOver();
       }
     }
   }
@@ -305,6 +322,10 @@ export class GameplayController extends Component {
 
   private handleClickTryAgain() {
     this.changeState(this.introState);
+  }
+
+  private handleClickHome() {
+    director.loadScene('MenuScene');
   }
 
   private updateDifficulty(level: 'EASY' | 'MEDIUM' | 'HARD') {
@@ -345,8 +366,7 @@ export class GameplayController extends Component {
       // console.log('Countdown:', countdown, 'CountdownMs:', countdownMs);
 
       if (countdownMs <= 0 && this._countdownInterval) {
-        clearInterval(this._countdownInterval);
-        this.changeState(this.gameOverState);
+        this.handleGameOver();
       }
     }, 10);
   }
@@ -358,5 +378,23 @@ export class GameplayController extends Component {
   private restartCountdown() {
     this.stopCountdown();
     this.startCountdown();
+  }
+
+  private pickRank(score: number): string {
+    if (score > 60) {
+      return 'S';
+    } else if (score <= 60 && score > 50) {
+      return 'A';
+    } else if (score <= 50 && score > 40) {
+      return 'B';
+    } else if (score <= 40 && score > 30) {
+      return 'C';
+    } else if (score <= 30 && score > 10) {
+      return 'D';
+    } else if (score <= 10 && score > 0) {
+      return 'E';
+    } else {
+      return 'F';
+    }
   }
 }

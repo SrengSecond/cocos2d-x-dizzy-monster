@@ -8,7 +8,7 @@ export class MenuController extends Component {
 
   onLoad() {
     this.playButton?.node.on(
-      Input.EventType.TOUCH_START,
+      Input.EventType.TOUCH_END,
       this.loadGameplayScene,
       this
     );

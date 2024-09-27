@@ -19,6 +19,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>button-patagon.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-2,0}</string>
+                <key>spriteSize</key>
+                <string>{119,134}</string>
+                <key>spriteSourceSize</key>
+                <string>{129,134}</string>
+                <key>textureRect</key>
+                <string>{{178,266},{119,134}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>button-small.png</key>
             <dict>
                 <key>aliases</key>
@@ -45,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{103,90}</string>
                 <key>textureRect</key>
-                <string>{{178,266},{103,90}}</string>
+                <string>{{193,402},{103,90}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -75,9 +90,9 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{243,437},{56,60}}</string>
+                <string>{{415,1},{56,60}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>game-icons_check-mark.png</key>
             <dict>
@@ -90,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{178,371},{64,64}}</string>
+                <string>{{285,402},{64,64}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -135,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{359,1},{52,48}}</string>
+                <string>{{299,63},{52,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>game-icons_podium.png</key>
             <dict>
@@ -150,9 +165,9 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{193,437},{62,48}}</string>
+                <string>{{351,1},{62,48}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>game-icons_reload.png</key>
             <dict>
@@ -165,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{244,371},{60,50}}</string>
+                <string>{{299,1},{60,50}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -180,7 +195,7 @@
                 <key>spriteSourceSize</key>
                 <string>{64,64}</string>
                 <key>textureRect</key>
-                <string>{{301,1},{50,56}}</string>
+                <string>{{351,51},{50,56}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -198,7 +213,7 @@
             <key>size</key>
             <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:2f1851d3a422727a2484cd9953e0b83e:b9eed641f7c65193d68920f4aba619c5:240848ad97db3b21fd898f16a7d3102d$</string>
+            <string>$TexturePacker:SmartUpdate:010c9ae5a513e408ee625bdae973693c:4dc6f2d9d3a80e774834eba29ae2f7f9:240848ad97db3b21fd898f16a7d3102d$</string>
             <key>textureFileName</key>
             <string>icon.png</string>
         </dict>
