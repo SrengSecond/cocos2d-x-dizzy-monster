@@ -8,12 +8,18 @@ import {
   SpriteFrame,
   ProgressBar,
   director,
+  Sprite,
+  Color,
+  Prefab,
+  instantiate,
+  Animation,
 } from 'cc';
 import {CardController} from './CardController';
 import {IntroState} from '../state/IntroState';
 import {GameplayState} from '../state/GameplayState';
 import {GameOverState} from '../state/GameOverstate';
 import {State} from '../state/State';
+import {OverlayController} from './OverlayController';
 
 const {ccclass, property} = _decorator;
 
@@ -33,6 +39,9 @@ export class GameplayController extends Component {
   @property(CardController)
   public cardController: CardController | null = null;
 
+  @property(OverlayController)
+  public overlayController: OverlayController | null = null;
+
   // 📦 Gameplay Actions Nodes
   @property(Button)
   private noButton: Button | null = null;
@@ -50,6 +59,14 @@ export class GameplayController extends Component {
   private gameplayUI: Node | null = null;
   @property(Node)
   private gameOverUI: Node | null = null;
+
+  // 📦 Prefab Nodes@property(Prefab)
+  @property(Node)
+  private checkMarkContainer: Node | null = null;
+  @property(Prefab)
+  private checkMarkPrefab: Prefab | null = null;
+  @property(Prefab)
+  private crossMarkPrefab: Prefab | null = null;
 
   // 💬 Label Actions Nodes
   @property(Label)
@@ -179,8 +196,16 @@ export class GameplayController extends Component {
   }
 
   private updateCircleCountdown(countdown: number) {
-    this.countdownProgressBar &&
-      (this.countdownProgressBar.progress = countdown / this._countdown);
+    const percent = countdown / this._countdown;
+
+    this.countdownProgressBar && (this.countdownProgressBar.progress = percent);
+
+    // const progressbarSprite = this.countdownProgressBar?.getComponent(Sprite);
+
+    // if (progressbarSprite) {
+    //   // Calculate the progress ratio
+    //   const progressRatio = percent;
+    // }
   }
 
   public updateGameOverResult() {
@@ -202,15 +227,25 @@ export class GameplayController extends Component {
     this.resetScore();
   }
 
-  public handleGameOver() {
+  public handleGameOver(by: 'TIME_OUT' | 'WRONG_ANSWER') {
     // Stop countdown
     this.stopCountdown();
 
-    // remove the last card
-    this.cardController && this.cardController.removeLastCardInstance();
+    const gameOverReason = by.split('_')?.join(' ')?.toLocaleLowerCase();
 
-    // change game state to game over
-    this.changeState(this.gameOverState);
+    this.overlayController && this.overlayController.open(gameOverReason);
+
+    setTimeout(() => {
+      // remove the last card
+      this.cardController && this.cardController.removeLastCardInstance();
+
+      this.overlayController && this.overlayController.reset();
+
+      this.removeCheckMark();
+
+      // change game state to game over
+      this.changeState(this.gameOverState);
+    }, 1500);
   }
 
   private findBestScore(currentScore: number): number {
@@ -280,6 +315,9 @@ export class GameplayController extends Component {
         // reset countdown
         this.restartCountdown();
 
+        // Show the check mark
+        this.showCheckMark(true);
+
         // remove the current card
         this.cardController.removePrevCardInstance();
 
@@ -287,8 +325,13 @@ export class GameplayController extends Component {
         this._prevCardSpriteFrame = this._currentCardSpriteFrame;
         this._currentCardSpriteFrame =
           this.cardController.getRandomGameplayCard();
+        // this.removeCheckMark();
       } else {
-        this.handleGameOver();
+        // this.cardController.showCheckMark(false);
+        this.handleGameOver('WRONG_ANSWER');
+
+        // Show the check mark
+        this.showCheckMark(false);
       }
     }
   }
@@ -303,6 +346,9 @@ export class GameplayController extends Component {
         // reset countdown
         this.restartCountdown();
 
+        // Show the check mark
+        this.showCheckMark(true);
+
         // remove the current card
         this.cardController.removePrevCardInstance();
 
@@ -310,8 +356,10 @@ export class GameplayController extends Component {
         this._prevCardSpriteFrame = this._currentCardSpriteFrame;
         this._currentCardSpriteFrame =
           this.cardController.getRandomGameplayCard();
+        // this.removeCheckMark();
       } else {
-        this.handleGameOver();
+        this.showCheckMark(false);
+        this.handleGameOver('WRONG_ANSWER');
       }
     }
   }
@@ -366,7 +414,7 @@ export class GameplayController extends Component {
       // console.log('Countdown:', countdown, 'CountdownMs:', countdownMs);
 
       if (countdownMs <= 0 && this._countdownInterval) {
-        this.handleGameOver();
+        this.handleGameOver('TIME_OUT');
       }
     }, 10);
   }
@@ -395,6 +443,42 @@ export class GameplayController extends Component {
       return 'E';
     } else {
       return 'F';
+    }
+  }
+
+  public showCheckMark(isChecked: boolean) {
+    if (
+      this.checkMarkContainer &&
+      this.checkMarkPrefab &&
+      this.crossMarkPrefab
+    ) {
+      const instance = instantiate(
+        isChecked ? this.checkMarkPrefab : this.crossMarkPrefab
+      );
+
+      this.checkMarkContainer.addChild(instance);
+
+      const instanceAnimation = instance.getComponent(Animation);
+
+      instanceAnimation &&
+        instanceAnimation.on(
+          Animation.EventType.FINISHED,
+          () => {
+            setTimeout(
+              () => {
+                instance.destroy();
+              },
+              isChecked ? 300 : 1000
+            );
+          },
+          instanceAnimation
+        );
+    }
+  }
+
+  private removeCheckMark() {
+    if (this.checkMarkContainer) {
+      this.checkMarkContainer.removeAllChildren();
     }
   }
 }
